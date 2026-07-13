@@ -24,6 +24,7 @@ import {
 } from "@/store/destinationSlice";
 import { deleteThumbnail } from "@/utils/api";
 import Editor from "@/components/Editor";
+import DestinationDetailFields from "@/components/destination/DestinationDetailFields";
 
 const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
 
@@ -51,6 +52,29 @@ export default function DestinationForm({ params }) {
     metaTitle: "",
     isActive: false,
     destinationtype: "international",
+    country: "",
+    startingPrice: "",
+    overview: [],
+    facts: {
+      best: "",
+      flight: "",
+      currency: "",
+      language: "",
+      tz: "",
+      budget: "",
+      weather: "",
+    },
+    beaches: [],
+    areas: [],
+    season: Array.from({ length: 12 }, () => ""),
+    cost: {
+      flights: "",
+      accom: "",
+      food: "",
+      transport: "",
+      activities: "",
+    },
+    gallery: [],
     faqs: [],
   });
 
@@ -459,6 +483,12 @@ export default function DestinationForm({ params }) {
                 </HButton>
               </Box>
             </Box>
+
+            <DestinationDetailFields
+              data={destinationData}
+              setData={setDestinationData}
+            />
+
             <HButton
               variant="contained"
               color="primary"

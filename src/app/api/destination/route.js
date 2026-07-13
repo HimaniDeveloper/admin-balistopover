@@ -3,6 +3,76 @@ import authMiddleware from "@/middleware/authMiddleware";
 import { success, error } from "@/utils/response";
 import Destination from "@/models/Destination";
 
+// Normalize the website detail fields (clone + drop empty entries)
+const buildDetailFields = ({
+  country,
+  startingPrice,
+  overview,
+  facts,
+  beaches,
+  areas,
+  season,
+  cost,
+  gallery,
+}) => ({
+  country: country || "",
+  startingPrice:
+    startingPrice === "" || startingPrice == null ? undefined : Number(startingPrice),
+  overview: Array.isArray(overview)
+    ? overview.map((p) => p || "").filter((p) => p.trim())
+    : [],
+  facts: {
+    best: facts?.best || "",
+    flight: facts?.flight || "",
+    currency: facts?.currency || "",
+    language: facts?.language || "",
+    tz: facts?.tz || "",
+    budget: facts?.budget || "",
+    weather: facts?.weather || "",
+  },
+  beaches: Array.isArray(beaches)
+    ? beaches
+        .filter((b) => b?.name || b?.description)
+        .map((b) => ({ name: b?.name || "", description: b?.description || "" }))
+    : [],
+  areas: Array.isArray(areas)
+    ? areas
+        .filter((a) => a?.name || a?.tag || a?.description)
+        .map((a) => ({
+          name: a?.name || "",
+          tag: a?.tag || "",
+          description: a?.description || "",
+        }))
+    : [],
+  season: Array.isArray(season)
+    ? season.map((s) => (["peak", "shoulder", "rainy"].includes(s) ? s : ""))
+    : [],
+  cost: {
+    flights:
+      cost?.flights === "" || cost?.flights == null ? undefined : Number(cost.flights),
+    accom:
+      cost?.accom === "" || cost?.accom == null ? undefined : Number(cost.accom),
+    food: cost?.food === "" || cost?.food == null ? undefined : Number(cost.food),
+    transport:
+      cost?.transport === "" || cost?.transport == null
+        ? undefined
+        : Number(cost.transport),
+    activities:
+      cost?.activities === "" || cost?.activities == null
+        ? undefined
+        : Number(cost.activities),
+  },
+  gallery: Array.isArray(gallery)
+    ? gallery
+        .filter((g) => g?.url)
+        .map((g) => ({
+          url: g?.url || "",
+          public_id: g?.public_id || "",
+          alt: g?.alt || "",
+        }))
+    : [],
+});
+
 export const POST = dbMiddleware(
   authMiddleware(["admin", "user"])(async (req, res) => {
     const {
@@ -19,6 +89,15 @@ export const POST = dbMiddleware(
       destinationtype,
       faqs,
       thumbnail_public_id,
+      country,
+      startingPrice,
+      overview,
+      facts,
+      beaches,
+      areas,
+      season,
+      cost,
+      gallery,
     } = await req.json();
     const userId = req?.user?.userId;
 
@@ -58,6 +137,17 @@ export const POST = dbMiddleware(
         destinationtype,
         faqs: formattedFaqs,
         thumbnail_public_id,
+        ...buildDetailFields({
+          country,
+          startingPrice,
+          overview,
+          facts,
+          beaches,
+          areas,
+          season,
+          cost,
+          gallery,
+        }),
       });
 
       await newDestination.save();
@@ -87,6 +177,15 @@ export const PUT = dbMiddleware(
         faqs = [],
         routPath,
         thumbnail_public_id,
+        country,
+        startingPrice,
+        overview,
+        facts,
+        beaches,
+        areas,
+        season,
+        cost,
+        gallery,
       } = await req.json();
 
       const updatedBy = req?.user?.userId;
@@ -128,6 +227,17 @@ export const PUT = dbMiddleware(
         updatedBy,
         faqs: safeFaqs,
         thumbnail_public_id,
+        ...buildDetailFields({
+          country,
+          startingPrice,
+          overview,
+          facts,
+          beaches,
+          areas,
+          season,
+          cost,
+          gallery,
+        }),
       };
 
       // ✅ Only "admin" can change routPath
