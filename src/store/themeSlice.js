@@ -30,13 +30,13 @@ const defaultMenu = {
       show: true,
       children: [],
     },
-    {
-      name: "Blogs",
-      url: "/blogs",
-      icon: "AutoStoriesTwoTone",
-      show: true,
-      children: [],
-    },
+    // {
+    //   name: "Blogs",
+    //   url: "/blogs",
+    //   icon: "AutoStoriesTwoTone",
+    //   show: true,
+    //   children: [],
+    // },
     {
       name: "Destination",
       url: "/destination",
@@ -103,13 +103,13 @@ const defaultMenu = {
     //   show: true,
     //   children: [],
     // },
-    {
-      name: "Blogs",
-      url: "/blogs",
-      icon: "AutoStoriesTwoTone",
-      show: true,
-      children: [],
-    },
+    // {
+    //   name: "Blogs",
+    //   url: "/blogs",
+    //   icon: "AutoStoriesTwoTone",
+    //   show: true,
+    //   children: [],
+    // },
     {
       name: "Destination",
       url: "/destination",

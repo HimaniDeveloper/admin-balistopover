@@ -7,9 +7,9 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#5a8f82",
-      light: "#7fb0a3",
-      dark: "#336c60",
+      main: "#4FB4E6",
+      light: "#7FCBF0",
+      dark: "#1E90D2",
     },
     danger: {
       main: red[500],
@@ -17,13 +17,13 @@ const darkTheme = createTheme({
       dark: red[900],
     },
     secondary: {
-      main: "#dd7a4f",
-      light: "#e89c78",
-      dark: "#c24e22",
+      main: "#FDB913",
+      light: "#FFD05C",
+      dark: "#F7941D",
     },
     active: {
-      text: "#5a8f82",
-      icon: "#5a8f82",
+      text: "#4FB4E6",
+      icon: "#4FB4E6",
     },
     background: {
       default: "#000000",
