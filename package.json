@@ -1,0 +1,49 @@
+{
+  "name": "admin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run migrate:up && next dev",
+    "build": "next build",
+    "start": "npm run migrate:up && next start",
+    "lint": "next lint",
+    "migrate:create": "migrate-mongo create",
+    "migrate:up": "migrate-mongo up",
+    "migrate:down": "migrate-mongo down"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^5.16.6",
+    "@mui/material": "^5.16.6",
+    "@mui/x-date-pickers": "^8.2.0",
+    "@reduxjs/toolkit": "^2.2.7",
+    "@vercel/blob": "^1.1.1",
+    "axios": "^1.11.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.7.0",
+    "cookie": "^0.6.0",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "jodit": "^4.7.9",
+    "jodit-react": "^5.2.38",
+    "jose": "^5.6.3",
+    "jsonwebtoken": "^9.0.2",
+    "migrate-mongo": "^11.0.0",
+    "mongoose": "^8.18.0",
+    "multer": "^2.0.2",
+    "next": "14.2.5",
+    "quill": "^2.0.3",
+    "quill-better-table": "^1.2.10",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-quill": "^2.0.0",
+    "react-redux": "^9.1.2",
+    "react-spinners": "^0.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5"
+  }
+}

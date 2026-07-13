@@ -1,0 +1,40 @@
+.faqTable {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.faqtdTh {
+  font-family: Roboto, sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: #333333;
+  font-weight: bold;
+  font-size: 0.8125rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+  cursor: pointer;
+}
+.faqthtd {
+  font-family: Roboto, sans-serif;
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 1.43;
+  display: table-cell;
+  vertical-align: inherit;
+  border-bottom: 1px solid rgba(224, 224, 224, 1);
+  text-align: left;
+  padding: 16px;
+  color: #333333;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 0.875rem;
+}

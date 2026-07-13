@@ -1,0 +1,39 @@
+.Login_Heading {
+  color: #c24e22;
+  font-family: "Poppins", sans-serif !important;
+  font-size: 30px;
+  font-weight: 600;
+}
+.LoginButton {
+  background: #336c60;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+.LoginButton:hover {
+  background: #2a5a50;
+}
+
+.css-fqklbv {
+  background-color: #dcdbdb;
+}
+.Login_text {
+  font-family: "Poppins", sans-serif;
+}
+
+.activeLinkTab {
+  /* color: #026f71; */
+  text-shadow: none;
+  background: linear-gradient(30deg, transparent, #336f61);
+}
+/* .activeLinkTab svg {
+  color: #026f71 !important;
+} */
+.activeLinkTab:hover {
+  color: #336f61 !important;
+}
+.normalLinkTab:hover {
+  color: #336f61 !important;
+}
+/* .normalLinkTab:hover svg {
+  color: #026f71 !important;
+} */
