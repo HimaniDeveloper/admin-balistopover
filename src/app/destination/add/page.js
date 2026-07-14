@@ -392,6 +392,23 @@ export default function DestinationForm() {
             />
           </Box> */}
           <Box mt={4}>
+            <Box
+              mb={2}
+              px={2}
+              py={1.5}
+              sx={{
+                borderLeft: "5px solid #1976d2",
+                backgroundColor: "rgba(25, 118, 210, 0.08)",
+                borderRadius: "4px",
+              }}
+            >
+              <Typography variant="h6" fontWeight={700} color="#1976d2">
+                FAQs
+              </Typography>
+              <Typography variant="caption" color="textSecondary">
+                Common questions shown on the destination page.
+              </Typography>
+            </Box>
             {destinationData.faqs.map((faq, index) => (
               <Box
                 key={index}
@@ -409,10 +426,16 @@ export default function DestinationForm() {
                   fullWidth
                   margin="normal"
                 />
-                <Editor
-                  content={faq.answer}
-                  onChange={(value) => handleFaqChange(index, "answer", value)}
-                  height={200}
+                <HInput
+                  label="Answer"
+                  value={faq.answer}
+                  onChange={(e) =>
+                    handleFaqChange(index, "answer", e.target.value)
+                  }
+                  fullWidth
+                  margin="normal"
+                  multiline
+                  rows={3}
                 />
                 <Box display="flex" justifyContent="flex-end" mt={2}>
                   <HButton

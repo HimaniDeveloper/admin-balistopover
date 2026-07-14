@@ -73,8 +73,20 @@ const ACTIVITY_ICONS = [
 ];
 
 const SectionTitle = ({ children, hint }) => (
-  <Box mt={4} mb={1}>
-    <Typography variant="h6">{children}</Typography>
+  <Box
+    mt={4}
+    mb={2}
+    px={2}
+    py={1.5}
+    sx={{
+      borderLeft: "5px solid #1976d2",
+      backgroundColor: "rgba(25, 118, 210, 0.08)",
+      borderRadius: "4px",
+    }}
+  >
+    <Typography variant="h6" fontWeight={700} color="#1976d2">
+      {children}
+    </Typography>
     {hint ? (
       <Typography variant="caption" color="textSecondary">
         {hint}
