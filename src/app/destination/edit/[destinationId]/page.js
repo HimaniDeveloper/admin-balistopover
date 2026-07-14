@@ -28,8 +28,6 @@ import DestinationDetailFields from "@/components/destination/DestinationDetailF
 
 const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
 
-
-
 export default function DestinationForm({ params }) {
   const { destinationId } = params;
   const router = useRouter();
@@ -84,7 +82,7 @@ export default function DestinationForm({ params }) {
     const fetchData = async () => {
       try {
         const result = await dispatch(
-          fetchDestinationData(destinationId)
+          fetchDestinationData(destinationId),
         ).unwrap();
         if (result) {
           setDestinationData(result);
@@ -157,7 +155,7 @@ export default function DestinationForm({ params }) {
         showToast({
           type: "error",
           message: "File is too large. Max size is 1MB.",
-        })
+        }),
       );
     }
   };
@@ -202,13 +200,13 @@ export default function DestinationForm({ params }) {
     setLoading(true);
     try {
       await dispatch(
-        updateDestinationData({ id: destinationId, ...destinationData })
+        updateDestinationData({ id: destinationId, ...destinationData }),
       ).unwrap();
       dispatch(
         showToast({
           type: "success",
           message: "Destination updated successfully!",
-        })
+        }),
       );
       router.back();
     } catch (error) {
@@ -222,7 +220,7 @@ export default function DestinationForm({ params }) {
     setDestinationData((prev) => ({
       ...prev,
       faqs: prev.faqs.map((faq, i) =>
-        i === index ? { ...faq, [field]: value } : faq
+        i === index ? { ...faq, [field]: value } : faq,
       ),
     }));
   };
@@ -435,12 +433,12 @@ export default function DestinationForm({ params }) {
               style={{ display: "none" }}
               onChange={handleImageChange}
             />
-            <Box mt={2} mb={12}>
+            {/* <Box mt={2} mb={12}>
               <Editor
                 content={destinationData?.content}
                 onChange={handleContentChange}
               />
-            </Box>
+            </Box> */}
             <Box mt={4}>
               {destinationData?.faqs?.map((faq, index) => (
                 <Box

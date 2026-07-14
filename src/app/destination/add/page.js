@@ -112,7 +112,7 @@ export default function DestinationForm() {
         showToast({
           type: "error",
           message: "File is too large. Max size is 1MB.",
-        })
+        }),
       );
     }
   };
@@ -145,13 +145,13 @@ export default function DestinationForm() {
         showToast({
           type: "success",
           message: "Destination added successfully!",
-        })
+        }),
       );
       router.push("/destination");
     } catch (err) {
       console.error("Failed to add destination:", err);
       dispatch(
-        showToast({ type: "error", message: "Failed to add destination" })
+        showToast({ type: "error", message: "Failed to add destination" }),
       );
     } finally {
       setLoading(false); // Set loading back to false
@@ -384,12 +384,12 @@ export default function DestinationForm() {
             style={{ display: "none" }}
             onChange={handleImageChange}
           />
-          <Box mt={2} mb={12}>
+          {/* <Box mt={2} mb={12}>
             <Editor
               content={destinationData.content}
               onChange={handleContentChange}
             />
-          </Box>
+          </Box> */}
           <Box mt={4}>
             {destinationData.faqs.map((faq, index) => (
               <Box
