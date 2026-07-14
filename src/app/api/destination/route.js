@@ -11,6 +11,7 @@ const buildDetailFields = ({
   facts,
   beaches,
   areas,
+  thingsToDo,
   season,
   cost,
   gallery,
@@ -42,6 +43,15 @@ const buildDetailFields = ({
           name: a?.name || "",
           tag: a?.tag || "",
           description: a?.description || "",
+        }))
+    : [],
+  thingsToDo: Array.isArray(thingsToDo)
+    ? thingsToDo
+        .filter((t) => t?.title || t?.description)
+        .map((t) => ({
+          icon: t?.icon || "",
+          title: t?.title || "",
+          description: t?.description || "",
         }))
     : [],
   season: Array.isArray(season)
@@ -95,6 +105,7 @@ export const POST = dbMiddleware(
       facts,
       beaches,
       areas,
+      thingsToDo,
       season,
       cost,
       gallery,
@@ -144,6 +155,7 @@ export const POST = dbMiddleware(
           facts,
           beaches,
           areas,
+          thingsToDo,
           season,
           cost,
           gallery,
@@ -183,6 +195,7 @@ export const PUT = dbMiddleware(
         facts,
         beaches,
         areas,
+        thingsToDo,
         season,
         cost,
         gallery,
@@ -234,6 +247,7 @@ export const PUT = dbMiddleware(
           facts,
           beaches,
           areas,
+          thingsToDo,
           season,
           cost,
           gallery,

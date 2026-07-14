@@ -64,6 +64,7 @@ export default function DestinationForm({ params }) {
     },
     beaches: [],
     areas: [],
+    thingsToDo: [],
     season: Array.from({ length: 12 }, () => ""),
     cost: {
       flights: "",

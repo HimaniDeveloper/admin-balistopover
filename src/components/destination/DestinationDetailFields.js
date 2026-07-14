@@ -55,6 +55,23 @@ const COST_FIELDS = [
   { key: "activities", label: "Activities & tours" },
 ];
 
+const ACTIVITY_ICONS = [
+  "surfing",
+  "snorkeling",
+  "diving",
+  "cruise",
+  "beach-club",
+  "island-hopping",
+  "hiking",
+  "spa",
+  "dining",
+  "nightlife",
+  "shopping",
+  "temple",
+  "waterfall",
+  "yoga",
+];
+
 const SectionTitle = ({ children, hint }) => (
   <Box mt={4} mb={1}>
     <Typography variant="h6">{children}</Typography>
@@ -143,6 +160,28 @@ export default function DestinationDetailFields({ data, setData }) {
     setData((prev) => ({
       ...prev,
       areas: (prev.areas || []).filter((_, i) => i !== index),
+    }));
+
+  // ---- thingsToDo ([{icon, title, description}]) ----
+  const handleThing = (index, field, value) =>
+    setData((prev) => ({
+      ...prev,
+      thingsToDo: (prev.thingsToDo || []).map((t, i) =>
+        i === index ? { ...t, [field]: value } : t
+      ),
+    }));
+  const addThing = () =>
+    setData((prev) => ({
+      ...prev,
+      thingsToDo: [
+        ...(prev.thingsToDo || []),
+        { icon: "", title: "", description: "" },
+      ],
+    }));
+  const deleteThing = (index) =>
+    setData((prev) => ({
+      ...prev,
+      thingsToDo: (prev.thingsToDo || []).filter((_, i) => i !== index),
     }));
 
   // ---- season (string[12]) ----
@@ -397,6 +436,75 @@ export default function DestinationDetailFields({ data, setData }) {
       ))}
       <HButton variant="outlined" onClick={addArea}>
         Add Area
+      </HButton>
+
+      {/* Things to do */}
+      <SectionTitle hint="Pick an icon, add a title and a short description for each activity.">
+        Things to do
+      </SectionTitle>
+      {(data.thingsToDo || []).map((thing, index) => (
+        <Box
+          key={index}
+          mb={2}
+          p={2}
+          border="1px solid #ccc"
+          borderRadius="8px"
+        >
+          <Grid container columnSpacing={2} alignItems="center">
+            <Grid item xs={12} sm={3}>
+              <FormControl fullWidth margin="normal">
+                <InputLabel id={`thing-icon-${index}`}>Icon</InputLabel>
+                <Select
+                  labelId={`thing-icon-${index}`}
+                  label="Icon"
+                  value={thing.icon || ""}
+                  onChange={(e) => handleThing(index, "icon", e.target.value)}
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {ACTIVITY_ICONS.map((ic) => (
+                    <MenuItem key={ic} value={ic}>
+                      {ic}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <HInput
+                label="Title"
+                value={thing.title || ""}
+                onChange={(e) => handleThing(index, "title", e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <HInput
+                label="Description"
+                value={thing.description || ""}
+                onChange={(e) =>
+                  handleThing(index, "description", e.target.value)
+                }
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Box display="flex" justifyContent="flex-end">
+            <HButton
+              variant="outlined"
+              color="error"
+              onClick={() => deleteThing(index)}
+            >
+              Remove
+            </HButton>
+          </Box>
+        </Box>
+      ))}
+      <HButton variant="outlined" onClick={addThing}>
+        Add Activity
       </HButton>
 
       {/* Best time to visit calendar */}

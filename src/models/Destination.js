@@ -81,6 +81,13 @@ const destinationSchema = new mongoose.Schema(
         description: { type: String },
       },
     ],
+    thingsToDo: [
+      {
+        icon: { type: String },
+        title: { type: String },
+        description: { type: String },
+      },
+    ],
     season: [
       {
         type: String,
