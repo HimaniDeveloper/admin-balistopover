@@ -391,6 +391,11 @@ export default function DestinationForm() {
               onChange={handleContentChange}
             />
           </Box> */}
+          <DestinationDetailFields
+            data={destinationData}
+            setData={setDestinationData}
+          />
+
           <Box mt={4}>
             <Box
               mb={2}
@@ -454,11 +459,6 @@ export default function DestinationForm() {
               </HButton>
             </Box>
           </Box>
-
-          <DestinationDetailFields
-            data={destinationData}
-            setData={setDestinationData}
-          />
 
           <HButton
             variant="contained"

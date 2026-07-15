@@ -392,64 +392,6 @@ export default function DestinationDetailFields({ data, setData }) {
         Add Beach
       </HButton>
 
-      {/* Popular areas to stay */}
-      <SectionTitle hint="Name, a short tag, and a description for each area.">
-        Popular areas to stay
-      </SectionTitle>
-      {(data.areas || []).map((area, index) => (
-        <Box
-          key={index}
-          mb={2}
-          p={2}
-          border="1px solid #ccc"
-          borderRadius="8px"
-        >
-          <Grid container columnSpacing={2} alignItems="center">
-            <Grid item xs={12} sm={3}>
-              <HInput
-                label="Area name"
-                value={area.name || ""}
-                onChange={(e) => handleArea(index, "name", e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
-            <Grid item xs={12} sm={3}>
-              <HInput
-                label="Tag"
-                value={area.tag || ""}
-                onChange={(e) => handleArea(index, "tag", e.target.value)}
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <HInput
-                label="Description"
-                value={area.description || ""}
-                onChange={(e) =>
-                  handleArea(index, "description", e.target.value)
-                }
-                fullWidth
-                margin="normal"
-              />
-            </Grid>
-          </Grid>
-          <Box display="flex" justifyContent="flex-end">
-            <HButton
-              variant="outlined"
-              color="error"
-              onClick={() => deleteArea(index)}
-            >
-              Remove
-            </HButton>
-          </Box>
-        </Box>
-      ))}
-      <HButton variant="outlined" onClick={addArea}>
-        Add Area
-      </HButton>
-
       {/* Things to do */}
       <SectionTitle hint="Pick an icon, add a title and a short description for each activity.">
         Things to do
@@ -519,6 +461,84 @@ export default function DestinationDetailFields({ data, setData }) {
         Add Activity
       </HButton>
 
+      {/* Popular areas to stay */}
+      <SectionTitle hint="Name, a short tag, and a description for each area.">
+        Popular areas to stay
+      </SectionTitle>
+      {(data.areas || []).map((area, index) => (
+        <Box
+          key={index}
+          mb={2}
+          p={2}
+          border="1px solid #ccc"
+          borderRadius="8px"
+        >
+          <Grid container columnSpacing={2} alignItems="center">
+            <Grid item xs={12} sm={3}>
+              <HInput
+                label="Area name"
+                value={area.name || ""}
+                onChange={(e) => handleArea(index, "name", e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <HInput
+                label="Tag"
+                value={area.tag || ""}
+                onChange={(e) => handleArea(index, "tag", e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <HInput
+                label="Description"
+                value={area.description || ""}
+                onChange={(e) =>
+                  handleArea(index, "description", e.target.value)
+                }
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Box display="flex" justifyContent="flex-end">
+            <HButton
+              variant="outlined"
+              color="error"
+              onClick={() => deleteArea(index)}
+            >
+              Remove
+            </HButton>
+          </Box>
+        </Box>
+      ))}
+      <HButton variant="outlined" onClick={addArea}>
+        Add Area
+      </HButton>
+
+      {/* Estimated trip cost */}
+      <SectionTitle hint="Per-person estimate in USD for each category.">
+        Estimated trip cost
+      </SectionTitle>
+      <Grid container columnSpacing={2}>
+        {COST_FIELDS.map((c) => (
+          <Grid item xs={12} sm={6} md={4} key={c.key}>
+            <HInput
+              label={c.label}
+              type="integer"
+              value={(data.cost && (data.cost[c.key] ?? "")) || ""}
+              onChange={(e) => handleCost(c.key, e.target.value)}
+              fullWidth
+              margin="normal"
+              variant="outlined"
+            />
+          </Grid>
+        ))}
+      </Grid>
+
       {/* Best time to visit calendar */}
       <SectionTitle hint="Mark each month as peak, shoulder or rainy season.">
         Best time to visit (season calendar)
@@ -544,26 +564,6 @@ export default function DestinationDetailFields({ data, setData }) {
                 ))}
               </Select>
             </FormControl>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Estimated trip cost */}
-      <SectionTitle hint="Per-person estimate in USD for each category.">
-        Estimated trip cost
-      </SectionTitle>
-      <Grid container columnSpacing={2}>
-        {COST_FIELDS.map((c) => (
-          <Grid item xs={12} sm={6} md={4} key={c.key}>
-            <HInput
-              label={c.label}
-              type="integer"
-              value={(data.cost && (data.cost[c.key] ?? "")) || ""}
-              onChange={(e) => handleCost(c.key, e.target.value)}
-              fullWidth
-              margin="normal"
-              variant="outlined"
-            />
           </Grid>
         ))}
       </Grid>
