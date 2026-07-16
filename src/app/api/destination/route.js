@@ -9,6 +9,7 @@ const buildDetailFields = ({
   startingPrice,
   overview,
   facts,
+  highlights,
   beaches,
   areas,
   thingsToDo,
@@ -31,6 +32,15 @@ const buildDetailFields = ({
     budget: facts?.budget || "",
     weather: facts?.weather || "",
   },
+  highlights: Array.isArray(highlights)
+    ? highlights
+        .filter((h) => h?.title || h?.description)
+        .map((h) => ({
+          icon: h?.icon || "",
+          title: h?.title || "",
+          description: h?.description || "",
+        }))
+    : [],
   beaches: Array.isArray(beaches)
     ? beaches
         .filter((b) => b?.name || b?.description)
@@ -103,6 +113,7 @@ export const POST = dbMiddleware(
       startingPrice,
       overview,
       facts,
+      highlights,
       beaches,
       areas,
       thingsToDo,
@@ -153,6 +164,7 @@ export const POST = dbMiddleware(
           startingPrice,
           overview,
           facts,
+          highlights,
           beaches,
           areas,
           thingsToDo,
@@ -193,6 +205,7 @@ export const PUT = dbMiddleware(
         startingPrice,
         overview,
         facts,
+        highlights,
         beaches,
         areas,
         thingsToDo,
@@ -245,6 +258,7 @@ export const PUT = dbMiddleware(
           startingPrice,
           overview,
           facts,
+          highlights,
           beaches,
           areas,
           thingsToDo,

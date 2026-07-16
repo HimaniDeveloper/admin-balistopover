@@ -55,6 +55,7 @@ export default function DestinationForm() {
       budget: "",
       weather: "",
     },
+    highlights: [],
     beaches: [],
     areas: [],
     thingsToDo: [],

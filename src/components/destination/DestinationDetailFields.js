@@ -55,6 +55,23 @@ const COST_FIELDS = [
   { key: "activities", label: "Activities & tours" },
 ];
 
+const HIGHLIGHT_ICONS = [
+  "beaches",
+  "resort",
+  "water",
+  "activities",
+  "romance",
+  "sunset",
+  "culture",
+  "food",
+  "nature",
+  "adventure",
+  "shopping",
+  "nightlife",
+  "wellness",
+  "temple",
+];
+
 const ACTIVITY_ICONS = [
   "surfing",
   "snorkeling",
@@ -172,6 +189,28 @@ export default function DestinationDetailFields({ data, setData }) {
     setData((prev) => ({
       ...prev,
       areas: (prev.areas || []).filter((_, i) => i !== index),
+    }));
+
+  // ---- highlights ([{icon, title, description}]) ----
+  const handleHighlight = (index, field, value) =>
+    setData((prev) => ({
+      ...prev,
+      highlights: (prev.highlights || []).map((h, i) =>
+        i === index ? { ...h, [field]: value } : h
+      ),
+    }));
+  const addHighlight = () =>
+    setData((prev) => ({
+      ...prev,
+      highlights: [
+        ...(prev.highlights || []),
+        { icon: "", title: "", description: "" },
+      ],
+    }));
+  const deleteHighlight = (index) =>
+    setData((prev) => ({
+      ...prev,
+      highlights: (prev.highlights || []).filter((_, i) => i !== index),
     }));
 
   // ---- thingsToDo ([{icon, title, description}]) ----
@@ -342,6 +381,77 @@ export default function DestinationDetailFields({ data, setData }) {
           </Grid>
         ))}
       </Grid>
+
+      {/* Highlights (Why visit) */}
+      <SectionTitle hint="'Why visit' reasons — pick an icon, add a title and a short description.">
+        Highlights (Why visit)
+      </SectionTitle>
+      {(data.highlights || []).map((hl, index) => (
+        <Box
+          key={index}
+          mb={2}
+          p={2}
+          border="1px solid #ccc"
+          borderRadius="8px"
+        >
+          <Grid container columnSpacing={2} alignItems="center">
+            <Grid item xs={12} sm={3}>
+              <FormControl fullWidth margin="normal">
+                <InputLabel id={`highlight-icon-${index}`}>Icon</InputLabel>
+                <Select
+                  labelId={`highlight-icon-${index}`}
+                  label="Icon"
+                  value={hl.icon || ""}
+                  onChange={(e) =>
+                    handleHighlight(index, "icon", e.target.value)
+                  }
+                >
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                  {HIGHLIGHT_ICONS.map((ic) => (
+                    <MenuItem key={ic} value={ic}>
+                      {ic}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+            </Grid>
+            <Grid item xs={12} sm={3}>
+              <HInput
+                label="Title"
+                value={hl.title || ""}
+                onChange={(e) => handleHighlight(index, "title", e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <HInput
+                label="Description"
+                value={hl.description || ""}
+                onChange={(e) =>
+                  handleHighlight(index, "description", e.target.value)
+                }
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+          </Grid>
+          <Box display="flex" justifyContent="flex-end">
+            <HButton
+              variant="outlined"
+              color="error"
+              onClick={() => deleteHighlight(index)}
+            >
+              Remove
+            </HButton>
+          </Box>
+        </Box>
+      ))}
+      <HButton variant="outlined" onClick={addHighlight}>
+        Add Highlight
+      </HButton>
 
       {/* Top beaches */}
       <SectionTitle hint="Name + short description for each beach.">

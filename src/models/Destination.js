@@ -68,6 +68,13 @@ const destinationSchema = new mongoose.Schema(
       budget: { type: String },
       weather: { type: String },
     },
+    highlights: [
+      {
+        icon: { type: String },
+        title: { type: String },
+        description: { type: String },
+      },
+    ],
     beaches: [
       {
         name: { type: String },
